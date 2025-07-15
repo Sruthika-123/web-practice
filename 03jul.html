@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roofsie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Urbanist', sans-serif;
+      background-color: black;
+      color: white;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header { width: 100%; position: relative; z-index: 100; }
+    .header-inner { display: flex; align-items: flex-start; }
+    .logo-box {
+      padding-left: 1rem;
+      position: relative; top: 20px;
+      flex-shrink: 0; z-index: 101;
+    }
+    .logo-box img { height: 80px; }
+
+    .nav-sections { flex: 1; display: flex; flex-direction: column; }
+
+    .top-bar {
+      background-color: dimgray;
+      padding: 0.5rem 1rem;
+      width: 100%;
+    }
+    .top-bar-content {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    .social-icons span { margin-left: 0.5rem; cursor: pointer; }
+
+    .main-navbar {
+      background-color: black;
+      border-bottom: 1px solid gray;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      width: 100%;
+    }
+    .main-navbar-content {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links { list-style: none; display: flex; gap: 2rem; }
+    .nav-links a { text-decoration: none; color: white; font-weight: 600; }
+    .nav-actions { display: flex; align-items: center; gap: 1rem; }
+    .estimate-btn {
+      background-color: rgb(242, 19, 19);
+      padding: 0.5rem 1rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      background-image: url('https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color: white;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      width: 100%; height: 100%;
+      background: linear-gradient(to right, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.1));
+      display: flex; align-items: center;
+      padding: 0 2rem;
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+    .hero-text h4 {
+      color: red; font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 0.5rem 0;
+    }
+    .hero-text p {
+      font-size: 1rem; color: #dddddd;
+      margin-bottom: 1.5rem;
+    }
+    .hero-btn {
+      display: inline-block;
+      background-color: red;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+
+    /* ===== FEATURES ===== */
+    .features-section {
+      background-color: #0f0f0f;
+      padding: 6rem 1rem 5rem;
+      margin-top: 0;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 -60px 60px -40px rgba(0, 0, 0, 0.6);
+    }
+
+    .features-wrapper {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background-color: #1a1a1a;
+      border-radius: 0 0 1rem 1rem;
+      overflow: visible;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      padding: 3rem 1rem 2rem;
+      margin-top: -96px;
+    }
+
+    .roof-icon {
+      position: absolute;
+      top: -40px; /* Only triangle is outside */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .roof-icon::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 40px solid transparent;
+      border-right: 40px solid transparent;
+      border-bottom: 40px solid red;
+    }
+
+    .roof-icon::after {
+      content: '';
+      width: 80px;
+      height: 50px;
+      background-color: red;
+      display: block;
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+
+    .icon {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: white;
+      z-index: 20;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      color: white;
+      margin-top: 1rem;
+    }
+
+    .feature-card p {
+      color: gray;
+      font-size: 0.95rem;
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    .read-more {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .read-more::after {
+      content: ' →';
+      color: red;
+      font-weight: bold;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions, .top-bar-content {
+        flex-wrap: wrap; justify-content: center;
+      }
+      .header-inner { flex-direction: column; align-items: center; }
+      .nav-sections { width: 100%; align-items: center; }
+      .logo-box {
+        padding-left: 0;
+        margin-bottom: 1rem;
+      }
+      .hero-text h1 { font-size: 2.2rem; }
+    }
+
+    /* OUR SERVICES STYLES */
+.services-section {
+  background: #0d0d0d;
+  color: white;
+  padding: 80px 50px;
+}
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.services-header .tagline {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.services-header h2 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.services-header .right {
+  max-width: 600px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+.services-grid {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.service-card {
+  background: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 320px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.img-wrapper {
+  position: relative;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.icon-box {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  background: red;
+  color: white;
+  padding: 15px;
+  font-size: 24px;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+.service-card .content {
+  padding: 20px;
+}
+
+.service-card h3 {
+  margin-top: 30px;
+  font-size: 20px;
+}
+
+.service-card p {
+  color: #aaa;
+  margin: 15px 0;
+}
+
+.service-card a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  border-top: 1px solid #444;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.service-card a::after {
+  content: " →";
+  color: red;
+}
+
+ *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            display: flex;
+            height: 250px;
+        }
+        
+        .cta-image {
+            flex: 1;
+            background: url('https://roofsie-html.vercel.app/main-html/assets/images/resources/cta-one-img-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .cta-red {
+            flex: 1;
+            background-color: #e74c3c;
+            padding: 40px;
+            color: white;
+            position: relative;
+        }
+        
+        .cta-content h1 {
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .cta-button {
+            position: absolute;
+            right: 40px;
+            bottom: 40px;
+            background: white;
+            color: #e74c3c;
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+      
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-box">
+        <img src="https://roofsie-html.vercel.app/main-html/assets/images/resources/logo-dark.png" alt="Roofsie Logo">
+      </div>
+      <div class="nav-sections">
+        <div class="top-bar">
+          <div class="top-bar-content">
+            <span>Mon - Sat: 10:00 - 18:00</span>
+            <span>Call: +91 98765 43210</span>
+            <span>Email: info@roofsie.com</span>
+            <div class="social-icons">
+              <span>🌐</span><span>🐦</span><span>📘</span>
+            </div>
+          </div>
+        </div>
+        <nav class="main-navbar">
+          <div class="main-navbar-content">
+            <ul class="nav-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Projects</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+              <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i>
+</span>
+              <a href="#" class="estimate-btn">Free Estimate</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <div class="hero-text">
+        <h4>Commercial & Residential</h4>
+        <h1>Reliable Roofing &<br>Fixing Services</h1>
+        <p>We provide a variety of roofing and maintenance services for all type of house makes happy.</p>
+        <a href="#" class="hero-btn">Discover More</a>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="features-section">
+    <div class="features-wrapper">
+      <div class="feature-card">
+        <div class="roof-icon"></div>
+        <div class="icon"><i class="fa-solid fa-house"></i>
+</div>
+        <h3>Quality<br>materials</h3>
+        <p>Nullam neque augue, maximus id nulla id, dignissim tristique nunc.</p>
+        <a href="#" class="read-more">READ MORE</a>
+      </div>
+      <div class="feature-card">
+        <div class="roof-icon"></div>
+         <div class="icons"><i class="fa-solid fa-user-hard-hat"></i>
+          </div>
+        <h3>Professional<br>workers</h3>
+        <p>Nullam neque augue, maximus id nulla id, dignissim tristique nunc.</p>
+        <a href="#" class="read-more">READ MORE</a>
+      </div>
+      <div class="feature-card">
+        <div class="roof-icon"></div>
+        <div class="icon"><i class="fa-solid fa-pen-to-square"></i>
+</div>
+        <h3>Free<br>estimates</h3>
+        <p>Nullam neque augue, maximus id nulla id, dignissim tristique nunc.</p>
+        <a href="#" class="read-more">READ MORE</a>
+      </div>
+    </div>
+  </section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section class="about-section">
+  <div class="about-container">
+    <div class="about-left">
+      <div class="image-wrapper">
+        <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg" alt="Worker">
+        <div class="satisfaction-popup">
+          <h2>98%</h2>
+          <p>Satisfied customers</p>
+          <div class="popup-arrow"></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-right">
+      <p class="tagline">
+        <!-- <div class="flex justify-center"> -->
+      <img src="https://roofsie-html.vercel.app/main-html/assets/images/shapes/section-title-shape-1.png" alt="Section Shape" class="w-[120px]">
+    ABOUT ROOFSIE</p>
+      <h2>Experienced & quality<br>roofing services providers</h2>
+      <p>
+        Nulla commodo dolor massa, vel pellentesque nulla congue quis. Fusce ut convallis diam. Nam id tortor et nunc
+        tempor faucibus. Sed eu leo egestas, imperdiet felis sed, vestibulum ligula.
+      </p>
+      <div class="points">
+        <div><span>✔</span> Innovative work</div>
+        <div><span>✔</span> Certified company</div>
+      </div>
+      <p class="extra-note">Lorem ipsum dolor sit amet sedme consectetur nod.</p>
+      <a href="#" class="hero-btn">Discover More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT SECTION STYLES ===== -->
+<style>
+  .about-section {
+    background-color: black;
+    padding: 6rem 1rem;
+    color: white;
+  }
+
+  .about-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .about-left, .about-right {
+    flex: 1 1 500px;
+  }
+
+  .image-wrapper {
+    position: relative;
+  }
+
+  .image-wrapper img {
+    width: 50%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .satisfaction-popup {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: red;
+    padding: 1.5rem 2rem;
+    border: 10px solid black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 5;
+    color: white;
+  }
+
+  .satisfaction-popup h2 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .popup-arrow {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 30px solid black;
+  }
+
+  .about-right .tagline {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-right h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-right p {
+    color: #ccc;
+    line-height: 1.6;
+  }
+
+  .points {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .points span {
+    color: red;
+    margin-right: 0.5rem;
+    font-weight: bold;
+  }
+
+  .extra-note {
+    font-size: 0.9rem;
+    color: gray;
+    margin-bottom: 2rem;
+  }
+</style>
+
+<!-- OUR SERVICES SECTION -->
+<section class="services-section">
+  <div class="services-header">
+    <div class="left">
+      <p class="tagline">🔗 OUR SERVICES</p>
+      <h2>We’re providing quality<br>roofing services</h2>
+    </div>
+    <div class="right">
+      <p>
+        Nulla commodo dolor massa, vel pellentesque nulla congue quis. Fusce ut convallis diam.
+        Nam id tortor et nunc tempor faucibus. Sed eu leo egestas.
+      </p>
+    </div>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="img-wrapper">
+        <img src="https://images.pexels.com/photos/3990359/pexels-photo-3990359.jpeg" alt="Single Play Roofing" />
+        <div class="icon-box">
+     </div>
+      </div>
+      <div class="content">
+        <h3>Single play roofing</h3>
+        <p>Nulla commodo dolor massa, vel pellentesque nulla congue quis.</p>
+        <a href="#">READ MORE →</a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="img-wrapper">
+        <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg" alt="Modified Roofing" />
+        <div class="icon-box">  <div><i class="fa-solid fa-scale-balanced text-yellow-400"></i> <span class="text-base ml-2"></span></div></div>
+      </div>
+      <div class="content">
+        <h3>Modified roofing</h3>
+        <p>Nulla commodo dolor massa, vel pellentesque nulla congue quis.</p>
+        <a href="#">READ MORE →</a>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="img-wrapper">
+        <img src="https://images.pexels.com/photos/585420/pexels-photo-585420.jpeg" alt="Built-up roofing" />
+        <div class="icon-box"><div class="icon-box">  <div><i class="fa-solid fa-scale-balanced text-yellow-400"></i> <span class="text-base ml-2"></span></div></div></div>
+      </div>
+      <div class="content">
+        <h3>Built-up roofing</h3>
+        <p>Nulla commodo dolor massa, vel pellentesque nulla congue quis.</p>
+        <a href="#">READ MORE →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-...longhash..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Font (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #111113;
+      color: white;
+    }
+  </style>
+
+<section class="px-4 py-20 md:px-20 bg-[#111113]">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    
+    <!-- Left content -->
+    <div>
+      <h4 class="text-red-500 font-semibold text-sm tracking-wide flex items-center gap-2 uppercase mb-4">
+        <i class="fa-solid fa-diagram-project"></i> Why Choose Us
+      </h4>
+      <h2 class="text-4xl font-bold leading-tight mb-6">
+        Few reasons to choose<br>our company
+      </h2>
+      <p class="text-gray-400 mb-8">
+        Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis<br> aute aboris nisi ut aliquip ex irure reprehenderit.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Box 1 -->
+        <div class="bg-[#1b1b1f] p-6 rounded shadow hover:shadow-lg transition text-center">
+          <div class="flex justify-center mb-4">
+            <div class="w-14 h-14 flex items-center justify-center rounded bg-[#111113] border border-[#292929]">
+              <i class="fa-solid fa-warehouse text-red-500 text-2xl"></i>
+            </div>
+          </div>
+          <h3 class="text-lg font-semibold">Quality materials</h3>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="bg-[#1b1b1f] p-6 rounded shadow hover:shadow-lg transition text-center">
+          <div class="flex justify-center mb-4">
+            <div class="w-14 h-14 flex items-center justify-center rounded bg-[#111113] border border-[#292929]">
+              <i class="fa-solid fa-shield-halved text-red-500 text-2xl"></i>
+            </div>
+          </div>
+          <h3 class="text-lg font-semibold">Fully insured</h3>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="bg-[#1b1b1f] p-6 rounded shadow hover:shadow-lg transition text-center">
+          <div class="flex justify-center mb-4">
+            <div class="w-14 h-14 flex items-center justify-center rounded bg-[#111113] border border-[#292929]">
+              <i class="fa-solid fa-handshake text-red-500 text-2xl"></i>
+            </div>
+          </div>
+          <h3 class="text-lg font-semibold">Mission statement</h3>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="bg-[#1b1b1f] p-6 rounded shadow hover:shadow-lg transition text-center">
+          <div class="flex justify-center mb-4">
+            <div class="w-14 h-14 flex items-center justify-center rounded bg-[#111113] border border-[#292929]">
+              <i class="fa-solid fa-user-gear text-red-500 text-2xl"></i>
+            </div>
+          </div>
+          <h3 class="text-lg font-semibold">Expert engineers</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right image -->
+    <div class="flex justify-center relative">
+      <img src="https://roofsie-html.vercel.app/main-html/assets/images/resources/why-choose-one-img-1.png" alt="Kevin Martin" class="w-[90%] max-w-md">
+      <div class="absolute bottom-5 left-5 text-red-500 font-signature text-lg md:text-xl">Kevin Martin</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
+
+
+<!-- ===== LATEST PROJECTS SECTION ===== -->
+<section class="projects-section">
+  <div class="projects-header">
+    <p class="tagline">🔗 LATEST PROJECTS</p>
+    <h2>Explore our recently<br>completed projects</h2>
+  </div>
+
+  <div class="projects-grid">
+    <!-- Project 1 -->
+    <a href="https://roofsie-html.vercel.app/main-html/work-details.html" class="project-card">
+      <img src="https://roofsie-html.vercel.app/main-html/assets/images/project/project-1-3.jpg" alt="Project 1">
+      <div class="project-overlay">
+        <span class="category">Residential</span>
+        <h3>Stylish Shingle Roof</h3>
+      </div>
+    </a>
+
+    <!-- Project 2 -->
+    <a href="https://roofsie-html.vercel.app/main-html/work-details.html" class="project-card">
+      <img src="https://roofsie-html.vercel.app/main-html/assets/images/project/project-1-1.jpg" alt="Project 2">
+      <div class="project-overlay">
+        <span class="category">Commercial</span>
+        <h3>Modern Slate Roof</h3>
+      </div>
+    </a>
+
+    <!-- Project 3 -->
+    <a href="https://roofsie-html.vercel.app/main-html/work-details.html" class="project-card">
+      <img src="https://roofsie-html.vercel.app/main-html/assets/images/project/project-1-2.jpg" alt="Project 3">
+      <div class="project-overlay">
+        <span class="category">Metal Roofing</span>
+        <h3>Industrial Warehouse</h3>
+      </div>
+    </a>
+
+    <!-- Project 4 -->
+    <a href="https://roofsie-html.vercel.app/main-html/work-details.html" class="project-card">
+      <img src="https://roofsie-html.vercel.app/main-html/assets/images/project/project-1-4.jpg" alt="Project 4">
+      <div class="project-overlay">
+        <span class="category">Luxury Villas</span>
+        <h3>High-End Roofing</h3>
+      </div>
+    </a>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    background-color: black;
+    color: white;
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+
+  .projects-header .tagline {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .projects-header h2 {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .projects-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: black;
+    display: block;
+    text-decoration: none;
+  }
+
+  .project-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover img {
+    transform: scale(1.1);
+  }
+
+  .project-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: bottom 0.4s ease;
+  }
+
+  .project-card:hover .project-overlay {
+    bottom: 0;
+  }
+
+  .project-overlay .category,
+  .project-overlay h3 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+  }
+
+  .project-card:hover .project-overlay .category,
+  .project-card:hover .project-overlay h3 {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-overlay .category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  .project-overlay h3 {
+    font-size: 1.1rem;
+    margin-top: 0.3rem;
+    color: white;
+  }
+
+  @media (max-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+<section class="trust-company">
+  <div class="trust-content">
+    <div class="trust-left">
+      <div class="red-shape">
+        <img src="https://roofsie-html.vercel.app/main-html/assets/images/shapes/traust-company-shape-1.png" alt="Red Shape">
+      </div>
+      <div class="play-button">&#9654;</div>
+      <h2>Hundreds of customers<br>trust our company</h2>
+    </div>
+    <div class="trust-right">
+      <ul>
+        <li><span>&#10004;</span> We’ve expert & certified staff</li>
+        <li><span>&#10004;</span> We only provide quality services</li>
+        <li><span>&#10004;</span> We offer you free estimates</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-company {
+    position: relative;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4)),
+      url("https://roofsie-html.vercel.app/main-html/assets/images/backgrounds/trust-company-bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 100px 40px;
+    color: white;
+    font-family: sans-serif;
+  }
+
+  .trust-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .trust-left {
+    flex: 1;
+    position: relative;
+  }
+
+  .trust-left .red-shape {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+  }
+
+  .trust-left img {
+    width: 180px;
+  }
+
+  .trust-left .play-button {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    color: red;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px black;
+    cursor: pointer;
+  }
+
+  .trust-left h2 {
+    position: relative;
+    z-index: 2;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+
+  .trust-right {
+    flex: 1;
+  }
+
+  .trust-right ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .trust-right li {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 30px;
+  }
+
+  .trust-right li span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: red;
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .trust-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .trust-left, .trust-right {
+      flex: unset;
+    }
+
+    .trust-left h2 {
+      font-size: 28px;
+    }
+  }
+</style>
+ <!-- ===== TESTIMONIAL SECTION ===== -->
+<section class="testimonial-section">
+  <div class="testimonial-shape"></div>
+
+  <div class="testimonial-container">
+    <!-- Testimonial Card 1 -->
+    <div class="testimonial-card">
+      <p class="testimonial-text">
+        “We’re very satisfied with Roofsie’s work. The team was very professional and finished on time. Highly recommend.”
+      </p>
+      <div class="author-info">
+        <img src="https://roofsie-html.vercel.app/main-html/assets/images/testimonial/testimonial-1-1.jpg" alt="Author 1">
+        <div>
+          <h4>John Smith</h4>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial Card 2 -->
+    <div class="testimonial-card">
+      <p class="testimonial-text">
+        “They explained the entire process clearly and were transparent with costs. The new roof looks great!”
+      </p>
+      <div class="author-info">
+        <img src="https://roofsie-html.vercel.app/main-html/assets/images/testimonial/testimonial-1-2.jpg" alt="Author 2">
+        <div>
+          <h4>Amanda Lee</h4>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL STYLES ===== -->
+<style>
+.testimonial-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+              url('https://roofsie-html.vercel.app/main-html/assets/images/backgrounds/trust-company-bg.jpg')
+              center/cover fixed no-repeat;
+  padding: 0 1rem 4rem;
+  position: relative;
+  color: white;
+}
+
+.testimonial-shape {
+  background: url('https://roofsie-html.vercel.app/main-html/assets/images/shapes/testimonial-one-shape-dark.png') no-repeat center;
+  background-size: 100% 100%;
+  width: 100%;
+  height:350px;
+  position: absolute;
+  z-index: 0;
+}
+
+.testimonial-container {
+  max-width: 1000px;
+  margin-top:0px;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.testimonial-card {
+  background-color: black;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 450px;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+}
+
+.testimonial-text {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  color: #ddd;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-info img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid red;
+}
+
+.author-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.stars {
+  font-size: 1.2rem;
+  color: gold;
+  display: inline-block;
+  position: relative;
+  padding: 0.3rem 0.8rem;
+  transition: background 0.3s ease;
+}
+
+.stars:hover {
+  background-color: darkred;
+  border-radius: 5px;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .testimonial-container {
+    flex-direction: column;
+  }
+
+  .testimonial-card {
+    max-width: 90%;
+    margin: auto;
+  }
+}
+</style>
+<!-- ===== NEWS & UPDATES SECTION ===== -->
+<section class="news-section">
+  <div class="news-header">
+    <p class="tagline"> NEWS & UPDATES</p>
+    <h2>Latest news & articles from the blog</h2>
+  </div>
+
+  <div class="news-grid">
+    <!-- Blog 1 -->
+    <article class="news-card">
+      <div class="news-img">
+        <img src="https://roofsie-html.vercel.app/main-html/assets/images/blog/blog-1-1.jpg" alt="Blog 1">
+      </div>
+      <div class="news-content">
+        <p class="meta">📅 12 June 2025 · 🏷️ Roofing</p>
+        <h3><a href="#">Top roofing trends in 2025</a></h3>
+        <p>Learn what’s new in roofing materials and technology to protect your home in style.</p>
+        <div class="author-box">
+          <img src="https://roofsie-html.vercel.app/main-html/assets/images/blog/blog-one-user-1-1.jpg" alt="Author 1">
+          <span>John Roof</span>
+        </div>
+        <a href="#" class="read-more">READ MORE</a>
+      </div>
+    </article>
+
+    <!-- Blog 2 -->
+    <article class="news-card">
+      <div class="news-img">
+        <img src="https://roofsie-html.vercel.app/main-html/assets/images/blog/blog-1-2.jpg" alt="Blog 2">
+      </div>
+      <div class="news-content">
+        <p class="meta">📅 04 May 2025 · 🏷️ Maintenance</p>
+        <h3><a href="#">How to maintain your roof yearly</a></h3>
+        <p>Simple seasonal checkups can save you big costs. Here’s how to inspect it like a pro.</p>
+        <div class="author-box">
+          <img src="https://roofsie-html.vercel.app/main-html/assets/images/blog/blog-one-user-1-2.jpg" alt="Author 2">
+          <span>Lisa Fixer</span>
+        </div>
+        <a href="#" class="read-more">READ MORE</a>
+      </div>
+    </article>
+
+    <!-- Blog 3 -->
+    <article class="news-card">
+      <div class="news-img">
+        <img src="https://roofsie-html.vercel.app/main-html/assets/images/blog/blog-1-3.jpg" alt="Blog 3">
+      </div>
+      <div class="news-content">
+        <p class="meta">📅 21 April 2025 · 🏷️ Services</p>
+        <h3><a href="#">What to expect from a roof inspection</a></h3>
+        <p>Before getting any work done, see how pros inspect and quote your roofing project.</p>
+        <div class="author-box">
+          <img src="https://roofsie-html.vercel.app/main-html/assets/images/blog/blog-one-user-1-3.jpg" alt="Author 3">
+          <span>Mark Builder</span>
+        </div>
+        <a href="#" class="read-more">READ MORE</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== NEWS SECTION STYLES ===== -->
+<style>
+  .news-section {
+    background-color: black;
+    color: white;
+    padding: 5rem 1rem;
+  }
+
+  .news-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .news-header .tagline {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .news-header h2 {
+    font-size: 2rem;
+  }
+
+  .news-grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .news-card {
+    background-color: #111;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .news-img img {
+    width: 100%;
+    display: block;
+    height: 200px;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+  }
+
+  .news-img:hover img {
+    filter: grayscale(80%);
+  }
+
+  .news-content {
+    padding: 1.5rem;
+  }
+
+  .news-content h3 {
+    margin: 0.8rem 0;
+    font-size: 1.2rem;
+  }
+
+  .news-content h3 a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+  }
+
+  .news-content h3 a:hover {
+    color: red;
+  }
+
+  .news-content p {
+    color: #ccc;
+    font-size: 0.95rem;
+  }
+
+  .news-content .meta {
+    font-size: 0.8rem;
+    color: gray;
+  }
+
+  .author-box {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+
+  .author-box img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid red;
+    object-fit: cover;
+  }
+
+  .author-box span {
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .read-more {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    display: inline-block;
+  }
+
+  .read-more::after {
+    content: ' →';
+    color: red;
+  }
+
+  @media (max-width: 768px) {
+    .news-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+ <div class="container">
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-image"></div>
+            <div class="cta-red">
+                <div class="cta-content">
+                    <h1>QUALITY ROOFING PROVIDER</h1>
+                    <p>Need roofing services?</p>
+                </div>
+                <button class="cta-button">GET FREE QUOTE</button>
+            </div>
+        </div>
+        
+  
+        
+       
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #111113;
+      color: white;
+    }
+  </style>
+
+<footer class="text-center text-white pt-16 pb-10 px-4">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 text-left md:text-center">
+
+    <!-- About Section -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4">Roofsie with more than two years<br>of proven success in quality<br>roofing services.</h2>
+      <div class="flex justify-center md:justify-center space-x-4 mt-4">
+        <a href="#" class="text-white text-xl"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-white text-xl"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-white text-xl"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#" class="text-white text-xl"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <!-- Explore Section -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Explore</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:underline">About</a></li>
+        <li><a href="#" class="hover:underline">Contact</a></li>
+        <li><a href="#" class="hover:underline">Recent Works</a></li>
+        <li><a href="#" class="hover:underline">Our Team</a></li>
+        <li><a href="#" class="hover:underline">Testimonials</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+      <p class="text-sm mb-4">Subscribe to our newsletter and get<br>update in your inbox.</p>
+      <form class="flex flex-col items-center">
+        <input type="email" placeholder="Enter Email Address"
+          class="px-4 py-2 mb-2 w-full max-w-xs text-black rounded focus:outline-none" />
+        <button class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded">
+          <i class="fas fa-envelope mr-2"></i>SUBSCRIBE
+        </button>
+      </form>
+    </div>
+
+    <!-- Contact Section -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Contact</h3>
+      <p class="mb-2 text-sm">88 Brooklyn Golden Road Street,<br>New York, USA</p>
+      <p class="mb-2"><i class="fas fa-envelope mr-2 text-red-500"></i>needhelp@company.com</p>
+      <p><i class="fas fa-phone mr-2 text-red-500"></i>+92 (003) 68-090</p>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="mt-10 border-t border-gray-700 pt-4 text-sm">
+    © All Copyright 2022 by Roofsie.com
+  </div>
+</footer>
+
+
+
+</body>
+</html>
